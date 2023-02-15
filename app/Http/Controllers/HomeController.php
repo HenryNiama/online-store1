@@ -23,6 +23,5 @@ class HomeController extends Controller
         $viewData['author'] = 'John Doe';
 
         return view('home.about')->with('viewData', $viewData);
-
     }
 }
