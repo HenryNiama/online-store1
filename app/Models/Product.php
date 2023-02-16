@@ -4,13 +4,18 @@ namespace App\Models;
 
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Item;
 
 class Product extends Model
 {
 
-    protected $table = 'products';
-    protected $primaryKey = 'id';
-    protected $fillable = ['name', 'description', 'price', 'image'];
+    /**
+     * PRODUCT ATTRIBUTES
+    …
+     * $this->attributes['created_at'] - timestamp - contains the product creation date
+     * $this->attributes['updated_at'] - timestamp - contains the product update date
+     * $this->items - Item[] - contains the associated items
+     */
 
     public static function validate($request){
         $request->validate([
@@ -85,6 +90,19 @@ class Product extends Model
 
     public function setUpdatedAt($updated_at){
         $this->updated_at = $updated_at;
+    }
+
+    // RELATIONSHIPS
+    public function items(){
+        return $this->hasMany(Item::class);
+    }
+
+    public function getItems(){
+        return $this->items;
+    }
+
+    public function setItems($items){
+        $this->items = $items;
     }
 
 }
